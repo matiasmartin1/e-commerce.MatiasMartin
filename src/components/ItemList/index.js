@@ -21,11 +21,17 @@ export default function ItemList() {
                     loading
                 </h3>
                 :
-                data.map((product, i) => {
+                data.map((product) => {
+                    console.log(product)
                     return (
-                            <Item key={i} imagen={product.imagen} title={product.nombre} price={product.precio}/> 
+                        product.map((prod, i) => {
+                            return (
+                                <Item key={prod.id} image={prod.imagen} title={prod.nombre} price={prod.precio} />
+                            )
+                        })
                     )
-                })
+                }
+                )
             }
         </>
     )
