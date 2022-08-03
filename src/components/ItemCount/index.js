@@ -31,11 +31,11 @@ export default function ItemCount(props) {
             <p>Nombre del producto</p>
             <div className="itemCountButtons">
 
-                    <button type="button" class="btn btn-outline-primary" onClick={restarAlContador}>-</button>
+                    <button type="button" className="btn btn-outline-primary" onClick={restarAlContador}>-</button>
                     <p>{contador}</p>
-                    <button type="button" class="btn btn-outline-primary" onClick={sumarAlContador}>+</button>
+                    <button type="button" className="btn btn-outline-primary" onClick={sumarAlContador}>+</button>
             </div>
-            <button class="btn btn-outline-primary" type='submit' onClick={onAdd}>Agregar al carrito</button>
+            <button className="btn btn-outline-primary" type='submit' onClick={onAdd}>Agregar al carrito</button>
         </div>
     )
 } 

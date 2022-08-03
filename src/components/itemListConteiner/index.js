@@ -1,10 +1,11 @@
 import ItemCount from "../ItemCount";
+import ItemList from "../ItemList";
 
 export default function ItemListConteiner (props) {
     return (
         <div>
-           <p>{props.texto}</p>
-           <ItemCount initial={1} stock={5}/>
+            <ItemList />
+            <ItemCount initial={1} stock={5}/>
         </div>
     )
 }
