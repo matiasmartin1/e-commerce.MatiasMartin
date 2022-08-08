@@ -1,11 +1,27 @@
-import ItemCount from "../ItemCount";
-import ItemList from "../ItemList";
+import { useState, useEffect } from "react";
 
-export default function ItemListConteiner (props) {
+import { getFetch } from "../Data/Data";
+import ItemList from "../ItemList";
+import ItemDetailConteiner from "../ItemDetailConteiner";
+
+
+export default function ItemListConteiner() {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getFetch
+            .then((resp) => setData(resp))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
+    }, [])
+
     return (
         <div>
-            <ItemList />
-            <ItemCount initial={1} stock={5}/>
+            {
+                loading ? <h2>Cargando... </h2> :
+                    <ItemList prod={data} />
+            }
         </div>
     )
 }

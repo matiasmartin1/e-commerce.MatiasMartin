@@ -1,14 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Item(props) {
+function Item({ image, title, price }) {
   return (
+    
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={props.image} />
+      <Card.Img variant="top" src={image} />
       <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text>
-          {props.price}
+          {price}
         </Card.Text>
         <Button variant="primary">Detalle de producto</Button>
       </Card.Body>

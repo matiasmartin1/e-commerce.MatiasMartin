@@ -69,4 +69,10 @@ const getFetch = new Promise ((resolve, reject)=>{
     condition ? setTimeout(()=>{resolve(Data)}, 2000) : reject(console.log("error en base de datos"))
 })
 
-export default getFetch;
+const getItem = (id) => {
+    return new Promise((resolve, reject) => {setTimeout(() => resolve(Data.find(prod => prod.id === id)), 2000)
+    })
+}
+
+export {getFetch};
+export {getItem}
