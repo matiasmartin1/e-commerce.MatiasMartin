@@ -63,14 +63,13 @@ const Data = [
     }
 ]
 
-
 const getFetch = new Promise ((resolve, reject)=>{
     let condition=true
     condition ? setTimeout(()=>{resolve(Data)}, 2000) : reject(console.log("error en base de datos"))
 })
 
 const getItem = (id) => {
-    return new Promise((resolve, reject) => {setTimeout(() => resolve(Data.find(prod => prod.id === id)), 2000)
+    return new Promise((resolve, reject) => {setTimeout(() => resolve(Data.find(prod => prod.id === 1)), 2000)
     })
 }
 

@@ -11,7 +11,7 @@ export default function ItemListConteiner() {
 
     useEffect(() => {
         getFetch
-            .then((resp) => setData(resp))
+            .then((resp) => setData(resp.find(obj => obj.id ===1)))
             .catch(err => console.log(err))
             .finally(() => setLoading(false))
     }, [])

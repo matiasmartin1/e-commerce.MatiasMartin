@@ -1,15 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Item({ image, title, price }) {
+function Item({ producto }) {
   return (
     
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} />
+      <Card.Img variant="top" src={producto.imagen} />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title>{producto.title}</Card.Title>
         <Card.Text>
-          {price}
+          {producto.price}
         </Card.Text>
         <Button variant="primary">Detalle de producto</Button>
       </Card.Body>
