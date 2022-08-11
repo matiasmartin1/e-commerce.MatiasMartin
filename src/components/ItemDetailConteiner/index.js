@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
-import {getItem} from "../Data/Data";
+import {getFetch, getItem} from "../Data/Data";
 import ItemDetail from "../ItemDetail";
+import {useParams} from 'react-router-dom'
 
 export default function ItemDetailConteiner() {
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true);
+    const {id} = useParams();
 
     useEffect(() => {
-        getItem()
-            .then(product => {
-                setData(product)
+        getFetch
+            .then(resp => {
+                if(id){
+                    setData(resp.find(product => product.id === id))
+                }
+                else {
+                    setData(resp)
+                }
             })
             .catch(err => console.log(err))
             .finally(setLoading(false))
@@ -21,7 +28,7 @@ export default function ItemDetailConteiner() {
             {
                 loading ? <h2>Cargando... </h2> :
                     <>
-                        <ItemDetail product={data}/>
+                        <ItemDetail producto={data}/>
                     </>
             }
         </div>

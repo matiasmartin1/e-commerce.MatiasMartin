@@ -1,12 +1,19 @@
-import Button from "react-bootstrap/esm/Button";
 import Card from 'react-bootstrap/Card';
 import ItemCount from "../ItemCount";
-import Item from "../Item.js";
 
-export default function ItemDetail(product) {
+export default function ItemDetail(producto) {
     return (
-     <div>
-        <Item producto={product} description='lorem'/>
-     </div>
+        <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={producto.imagen} />
+            <Card.Body>
+                <Card.Title>{producto.title}</Card.Title>
+                <Card.Text>
+                    {producto.precio}
+                    {producto.descripcion}
+                </Card.Text>
+                <ItemCount initial='1' stock={producto.stock} />
+            </Card.Body>
+
+        </Card>
     );
 }

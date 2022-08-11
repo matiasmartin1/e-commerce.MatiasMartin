@@ -1,21 +1,30 @@
 import { useState, useEffect } from "react";
 
-import { getFetch } from "../Data/Data";
+import { getCategory, getFetch } from "../Data/Data";
 import ItemList from "../ItemList";
-import ItemDetailConteiner from "../ItemDetailConteiner";
+import { useParams  } from 'react-router-dom'
 
 
 export default function ItemListConteiner() {
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    
+    const {categoryId} = useParams()
 
     useEffect(() => {
-        getFetch
-            .then((resp) => setData(resp.find(obj => obj.id ===1)))
-            .catch(err => console.log(err))
-            .finally(() => setLoading(false))
-    }, [])
-
+          getFetch
+                .then(resp => {
+                    if(categoryId) {
+                        setData(resp.filter(products => products.categoria === categoryId))
+                    }
+                    else {
+                        setData(resp)
+                    }
+                })
+                .catch(err => console.log(err))
+                .finally(() => setLoading(false))
+        }, [categoryId])
     return (
         <div>
             {
