@@ -6,14 +6,13 @@ export default function ItemDetail(producto) {
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={producto.imagen} />
             <Card.Body>
-                <Card.Title>{producto.title}</Card.Title>
+                <Card.Title>{producto.nombre}</Card.Title>
                 <Card.Text>
                     {producto.precio}
                     {producto.descripcion}
                 </Card.Text>
-                <ItemCount initial='1' stock={producto.stock} />
+                <ItemCount initial={1} stock={producto.stock} />
             </Card.Body>
-
         </Card>
     );
 }

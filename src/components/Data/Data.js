@@ -1,6 +1,6 @@
 const Data = [
     {
-        id: 0,
+        id: '0',
         nombre: 'Zapatilla Blanca Polo Label',
         precio: 5.499,
         stock: 3,
@@ -10,7 +10,7 @@ const Data = [
 
     },
     {
-        id: 1,
+        id: '1',
         nombre: 'Zapatilla Azul Prowess',
         precio: 4.574,
         stock: 10,
@@ -19,7 +19,7 @@ const Data = [
         descripcion: 'Descripcion del producto'
     },
     {
-        id: 2,
+        id: '2',
         nombre: 'Zapatilla Marrón Polo Label',
         precio: 5.999,
         stock: 10,
@@ -29,7 +29,7 @@ const Data = [
 
     },
     {
-        id: 3,
+        id: '3',
         nombre: 'Zapatilla Negra Prince',
         precio: 6.490,
         stock: 20,
@@ -58,7 +58,7 @@ const Data = [
 
     },
     {
-        id: 6,
+        id: '6',
         nombre: 'Zapatilla Negra Polo Label',
         precio: 5.999,
         stock: 5,
@@ -68,7 +68,7 @@ const Data = [
 
     },
     {
-        id: 7,
+        id: '7',
         nombre: 'Zapatilla Negra Reef Byron Bay',
         precio: 1060,
         stock: 10.339,

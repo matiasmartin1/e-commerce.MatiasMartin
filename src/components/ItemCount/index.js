@@ -28,9 +28,7 @@ export default function ItemCount(props) {
 
     return (
         <div>
-            <p>Nombre del producto</p>
             <div className="itemCountButtons">
-
                     <button type="button" className="btn btn-outline-primary" onClick={restarAlContador}>-</button>
                     <p>{contador}</p>
                     <button type="button" className="btn btn-outline-primary" onClick={sumarAlContador}>+</button>

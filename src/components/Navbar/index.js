@@ -15,7 +15,9 @@ function NavbarComp() {
             </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/category/:id">Tipos de zapatilla 3</Nav.Link>
+            <Nav.Link as={Link} to='/category/1' >Tipos de zapatilla 1</Nav.Link>
+            <Nav.Link as={Link} to='/category/2' >Tipos de zapatilla 2</Nav.Link>
+            <Nav.Link as={Link} to='/category/3' >Tipos de zapatilla 3</Nav.Link>
             <Nav.Link as={Link} to="/">Descuentos</Nav.Link>
           </Nav>
           <CartWidget/>
