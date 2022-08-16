@@ -1,29 +1,27 @@
 import { useEffect, useState } from "react";
-import {getFetch, getItem} from "../Data/Data";
+import { getItem} from "../Data/Data";
 import ItemDetail from "../ItemDetail";
 import {useParams} from 'react-router-dom'
 
 export default function ItemDetailConteiner() {
-    const [data, setData] = useState()
+    const [data, setData] = useState({})
     const [loading, setLoading] = useState(true);
+    
     const {id} = useParams();
 
     useEffect(() => {
-        getFetch
+        getItem(id)
             .then(resp => {
-                console.log(resp);
                 if(id){
-                    setData(resp.filter(product => product.id === id))
+                    setData(resp)
                 }
                 else {
-                    setData(resp)
+                   console.log('Este producto no existe');
                 }
             })
             .catch(err => console.log(err))
             .finally(setLoading(false))
     }, [id])
-
-    console.log(data);
     return (
         <div>
             {

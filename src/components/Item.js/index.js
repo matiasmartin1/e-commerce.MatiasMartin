@@ -10,7 +10,7 @@ function Item({ producto }) {
       <Card.Body>
         <Card.Title>{producto.title}</Card.Title>
         <Card.Text>
-          {producto.precio}
+          $ {producto.precio}
         </Card.Text>
         <Link to={`/item/${producto.id}`}>
         <Button variant="primary"> Detalle de producto</Button>

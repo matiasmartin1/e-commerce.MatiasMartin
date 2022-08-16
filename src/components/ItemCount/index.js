@@ -5,6 +5,7 @@ export default function ItemCount(props) {
 
     const [contador, setContador] = useState(props.initial);
 
+
     function sumarAlContador() {
         if (contador === props.stock) {
             console.log('Maxima cantidad del producto');
@@ -23,7 +24,7 @@ export default function ItemCount(props) {
     }
 
     function onAdd() {
-        console.log('Agregado al carrito');
+        console.log('Agregar al carrito');
     }
 
     return (
@@ -34,6 +35,7 @@ export default function ItemCount(props) {
                     <button type="button" className="btn btn-outline-primary" onClick={sumarAlContador}>+</button>
             </div>
             <button className="btn btn-outline-primary" type='submit' onClick={onAdd}>Agregar al carrito</button>
+            <button className="btn btn-outline-primary" type='submit' onClick={onAdd}>Comprar ahora</button>
         </div>
     )
 } 
