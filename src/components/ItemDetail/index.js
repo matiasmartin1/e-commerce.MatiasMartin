@@ -34,6 +34,7 @@ export default function ItemDetail({ producto }) {
           <ItemCount
             stock={producto.stock}
             itemAddToCart={onAddItems}
+            initial={1}
           />
         )}
             </Card.Body>
