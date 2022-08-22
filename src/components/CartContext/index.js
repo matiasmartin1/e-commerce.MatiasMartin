@@ -1,45 +1,60 @@
-import React, { useState } from "react";
-import { createContext } from "react";
+import React, { useState, useContext } from "react";
+import { Button } from 'react-bootstrap'
 
-export const CartContext = React.createContext();
 
+export const CartContext = React.createContext([]);
+export const useCartContext = () => useContext(CartContext);
+    
 export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([])
-    const [totalPrice, setTotalPrice] = useState();
 
-
-    const isInCart = (id) => {
-        const productInCart = cart.find((productInCart) => productInCart.id === id);
-        if (productInCart) return true;
-        return false;
-    };
-
-    const addItem = (item, quantity) => {
-        if (isInCart = true) {
-            console.log('No se puede agregar el mismo item')
-        } else {
-            setTotalPrice(totalPrice + item.precio * quantity)
-            setCart(cart.push(item))
-        }
+    const addItem = (item) => {
+    const listaActualizada = cart.find(
+        (productInCart) => productInCart.id === item.id
+      )
+        ? cart.map((productInCart) => {
+            if (productInCart.id === item.id) {
+              return {
+                ...productInCart,
+                quantity: productInCart.quantity + item.quantity,
+              };
+            }
+            return productInCart;
+          })
+        : [...cart, item];
+      setCart(listaActualizada);
     }
 
     const removeItem = (itemId) => {
         setCart(cart.filter((product) => product.id !== itemId));
-        const itemRemoved = cart.find(product => product.id === id);
-        setCantInCart(cantInCart - itemRemoved.contador);
-        setTotalPrice(totalPrice - itemRemoved.contador * itemRemoved.precio);
     };
 
     const clear = () => {
         setCart([])
-        setPrice(0);
     }
 
+    const totalPrice = () => {
+        return cart.length >= 1 ? (cart.reduce((prev, item) => prev + item.quantity * item.precio, 0)) : (
+            " "
+          );;
+      };
+
+      const finalizarCompra = () => {
+        return cart.length >= 1 ? (
+          <Button onClick={clear} className="btn btn-success w-100">
+            Finalizar Compra
+          </Button>
+        ) : (
+          " "
+        );
+      };
+    
+
     return (
-        <CartContextProvider value={{ cart, addItem, removeItem, clear, totalPrice }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, clear, totalPrice, cartData: cart, finalizarCompra}}>
             {children}
-        </CartContextProvider>
+        </CartContext.Provider>
     )
 }
 
-export default CartContextProvide;
+export default CartContextProvider;

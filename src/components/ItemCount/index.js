@@ -1,11 +1,9 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import './itemCount.css'
-import { CartContext } from '../CartContext'
 
 export default function ItemCount({ stock, initial, itemAddToCart }) {
 
     const [contador, setContador] = useState(initial);
-    const {addItem} = useContext(CartContext)
 
     const onAdd = () => {
         console.log(`${contador} agregados al carrito!`);

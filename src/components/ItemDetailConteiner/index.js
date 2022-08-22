@@ -27,7 +27,7 @@ export default function ItemDetailConteiner() {
             {
                 loading ? <h2>Cargando... </h2> :
                     <>
-                        <ItemDetail producto={data}/>
+                        <ItemDetail {...data}/>
                     </>
             }
         </div>
