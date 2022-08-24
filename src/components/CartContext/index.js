@@ -1,60 +1,59 @@
-import React, { useState, useContext } from "react";
+import { useState, createContext } from "react";
 import { Button } from 'react-bootstrap'
 
 
-export const CartContext = React.createContext([]);
-export const useCartContext = () => useContext(CartContext);
-    
+export const CartContext = createContext();
+
 export const CartContextProvider = ({ children }) => {
-    const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([])
+  const [cantInCart, setCantInCart] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
 
-    const addItem = (item) => {
-    const listaActualizada = cart.find(
-        (productInCart) => productInCart.id === item.id
-      )
-        ? cart.map((productInCart) => {
-            if (productInCart.id === item.id) {
-              return {
-                ...productInCart,
-                quantity: productInCart.quantity + item.quantity,
-              };
-            }
-            return productInCart;
-          })
-        : [...cart, item];
-      setCart(listaActualizada);
+  const isInCart = (id) => {
+    const productInCart = cart.find((product) => product.id === id)
+    if (productInCart) return true;
+    return false;
+  }
+
+  const addItem = (product) => {
+    setCantInCart(cantInCart + product.contador);
+    setTotalPrice(totalPrice + product.precio*product.contador)
+    if (isInCart(product.id)) {
+      const newCart = cart.map((productInCart) => {
+        if (productInCart.id === product.id) {
+          return {
+            ...productInCart,
+            contador: productInCart.contador + product.contador
+          };
+        } else {
+          return productInCart
+        }
+      })
+      setCart(newCart)
+    } else {
+      setCart([...cart, product])
     }
+  }
 
-    const removeItem = (itemId) => {
-        setCart(cart.filter((product) => product.id !== itemId));
-    };
+  const removeItem = (id) => {
+    setCart(cart.filter((product) => product.id !== id))
+    const itemRemoved = cart.find(product => product.id === id);
+    setCantInCart(cantInCart - itemRemoved.contador);
+    setTotalPrice(totalPrice - itemRemoved.contador * itemRemoved.precio);
+  }
 
-    const clear = () => {
-        setCart([])
-    }
+  const clearCart = () => {
+    setCart([])
+    setCantInCart(0)
+    setTotalPrice(0);
+  }
 
-    const totalPrice = () => {
-        return cart.length >= 1 ? (cart.reduce((prev, item) => prev + item.quantity * item.precio, 0)) : (
-            " "
-          );;
-      };
 
-      const finalizarCompra = () => {
-        return cart.length >= 1 ? (
-          <Button onClick={clear} className="btn btn-success w-100">
-            Finalizar Compra
-          </Button>
-        ) : (
-          " "
-        );
-      };
-    
-
-    return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, clear, totalPrice, cartData: cart, finalizarCompra}}>
-            {children}
-        </CartContext.Provider>
-    )
+  return (
+    <CartContext.Provider value={{ cart, addItem, removeItem, clearCart, cantInCart, totalPrice }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 export default CartContextProvider;

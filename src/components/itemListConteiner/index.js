@@ -4,6 +4,9 @@ import { getCategory, getFetch } from "../Data/Data";
 import ItemList from "../ItemList";
 import { useParams } from 'react-router-dom'
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 
 export default function ItemListConteiner() {
 
@@ -28,11 +31,13 @@ export default function ItemListConteiner() {
             .finally(() => setLoading(false))
     }, [categoryId])
     return (
-        <div>
+        <Container>
+            <Row>
             {
                 loading ? <h2>Cargando... </h2> :
-                    <ItemList prod={data} />
+                    <ItemList prod={data}  />
             }
-        </div>
+            </Row>
+        </Container>
     )
 }

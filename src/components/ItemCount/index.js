@@ -1,30 +1,43 @@
-import {  useState } from "react";
+import {  useContext, useState, useEffect } from "react";
+import { CartContext } from "../CartContext";
 import './itemCount.css'
 
-export default function ItemCount({ stock, initial, itemAddToCart }) {
+export default function ItemCount({ stock, initial, itemAddToCart, itemData }) {
 
-    const [contador, setContador] = useState(initial);
+    const [contador, setContador] = useState(1);
+    const [cantStock, setCantStock] = useState(stock);
 
-    const onAdd = () => {
-        console.log(`${contador} agregados al carrito!`);
-        itemAddToCart(contador);
+    const { addItem } = useContext(CartContext)
+    const itemDataCount = {
+        ...itemData,
+        contador
     }
 
-    function sumarAlContador() {
-        if (contador === stock) {
-            console.log('Maxima cantidad del producto');
-        } else {
-            setContador(contador + 1);
+    useEffect(()=>{
+        setCantStock(stock)
+      },[stock])
+    
+      function sumarAlContador() {
+        if (cantStock > 1) {
+          setContador(contador + 1);
+          setCantStock(cantStock - 1);
         }
-    }
-
-    function restarAlContador() {
-        if (contador <= initial) {
-            console.log('No puede ser menos de 1')
-        } else {
-            setContador(contador - 1);
+      }
+      function restarAlContador() {
+        if (contador > 1) {
+          setContador(contador - 1);
+          setCantStock(cantStock + 1);
         }
-    }
+      }
+      function onAdd() {
+        if (contador >= 1) {
+          setCantStock(cantStock - contador);
+          setCantStock(cantStock);
+          itemAddToCart();
+        }
+      }
+
+
     return (
         <div>
             <div className="itemCountButtons">
@@ -32,7 +45,11 @@ export default function ItemCount({ stock, initial, itemAddToCart }) {
                     <p>{contador}</p>
                     <button type="button" className="btn btn-outline-primary" onClick={sumarAlContador}>+</button>
             </div>
-            <button className="btn btn-outline-primary" type='button' onClick={onAdd}>Agregar al carrito</button>
+            <button className="btn btn-outline-primary" type='button' onClick={()=>{
+            onAdd();
+            addItem({...itemDataCount})
+          }}
+          >Agregar al carrito</button>
         </div>
     )
 } 

@@ -1,15 +1,22 @@
-import {FaShoppingCart} from 'react-icons/fa'
-import { useCartContext } from '../CartContext';
+import React, {useContext} from "react"
+import {AiOutlineShoppingCart} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { Nav } from 'react-bootstrap';
+import { CartContext } from "../CartContext";
 
-export default function CartWidget () {
-  const { cartData } = useCartContext();
-
+function Cart(){
+    const { cantInCart } = useContext(CartContext)
+    
+ 
     return (
-        <Nav.Link as={Link} to={`/cart`} >
-        <FaShoppingCart />
-        <span>{ cartData.length }</span>
-        </Nav.Link>
+        
+        <div className="cartIcon">
+            <Link to="/cart">
+            <AiOutlineShoppingCart className='icon__cartIcon'/>
+            </Link>
+            {cantInCart!==0 ? <input type="text" value={cantInCart} readOnly/> : ""}
+            
+        </div>
     )
-}  
+}
+ 
+export default Cart

@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
 import Card from "react-bootstrap/Card";
-import { useCartContext } from '../CartContext';
+import { useContext } from '../CartContext';
 import Button from 'react-bootstrap/Button'
 
+
 const CartItem = ({ producto }) => {
-    const { removeItem } = useCartContext();
+    const { removeItem } = useContext();
 
 
   return (
