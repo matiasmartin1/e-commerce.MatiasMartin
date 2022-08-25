@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getItem} from "../Data/Data";
 import ItemDetail from "../ItemDetail";
 import {useParams} from 'react-router-dom'
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { db } from "../../Firebase/FirebaseConfig";
 
 export default function ItemDetailConteiner() {
     const [data, setData] = useState({})
@@ -9,19 +11,15 @@ export default function ItemDetailConteiner() {
     
     const {id} = useParams();
 
-    useEffect(() => {
-        getItem(id)
-            .then(resp => {
-                if(id){
-                    setData(resp)
-                }
-                else {
-                   console.log('Este producto no existe');
-                }
-            })
-            .catch(err => console.log(err))
-            .finally(setLoading(false))
-    }, [id])
+    useEffect(()=>{
+        const dbDoc = doc(db, 'item', id);
+        getDoc(dbDoc)
+        .then(res => setData({id:res.id, ...res.data()}))
+        .catch(err=>console.log(err))
+        .finally(console.log())
+        .finally(setLoading(false))
+    }, [id]);
+
     return (
         <div>
             {
