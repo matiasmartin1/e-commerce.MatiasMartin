@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
 
 export default function ItemDetail({ id,
-  nombre,
-  precio,
+  title,
+  price,
   descripcion,
   stock,
-  imagen,
+  image,
  }) {
 
   const [addedToCart, setAddedToCart] = useState(false);
-  const itemData = { nombre, imagen, precio, id, stock };
+  const itemData = { title, image, price, id, stock };
 
 
   const onAddItems = (quantityToAdd) => {
@@ -22,11 +22,11 @@ export default function ItemDetail({ id,
 
   return (
     <Card style={{ width: '18rem' }} justify-content='center'>
-      <Card.Img variant="top" src={imagen} />
+      <Card.Img variant="top" src={image} />
       <Card.Body>
-        <Card.Title>{nombre}</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text>
-          $ {precio}
+          $ {price}
           <br></br>
           {descripcion}
         </Card.Text>

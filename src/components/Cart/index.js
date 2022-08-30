@@ -40,16 +40,16 @@ export default function Cart() {
                 <Row key={item.id} >
                   <Col m={2} >
                     <Link to={`/item/${item.id}`}>
-                      <img src={item.imagen} width="100px"  alt={item.nombre}></img>
+                      <img src={item.image} width="100px"  alt={item.title}></img>
                     </Link>
                   </Col>
                   <Col m={3} >
-                    {item.nombre} por {item.weight}
+                    {item.title}  {item.weight}
                   </Col>
                   <Col m={2} >{item.contador}</Col>
-                  <Col m={2} >{`$ ${item.precio}`}</Col>
+                  <Col m={2} >{`$ ${item.price}`}</Col>
                   <Col m={2} >{`$ ${
-                    item.contador * item.precio
+                    item.contador * item.price
                   }`}</Col>
                   <Col m={1} >
                     <Button
