@@ -4,12 +4,50 @@ import { Col, Container, Row } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { collection, setDoc, doc, updateDoc, increment } from 'firebase/firestore';
+import { DB } from '../../Firebase/FirebaseConfig';
 
 export default function Cart() {
 
   const { cart, removeItem, clearCart, totalPrice } = useContext(CartContext)
 
-  console.log(totalPrice);
+  const createOrder = () => {
+    const itemsForDB = cart.map(item => ({
+      id: item.id,
+      title: item.title,
+      price: item.price
+    }))
+    let order = {
+      buyer: {
+        name: 'Matias Martin',
+        phone: '3364 123456',
+        email: 'matiasmartin@gmail.com'
+      },
+      items: itemsForDB,
+      total: totalPrice 
+    }
+    
+  const createOrderInFirestore = async () => {
+    const newOrderRef = doc(collection(DB, 'orders'))
+    await setDoc(newOrderRef, order)
+    return newOrderRef
+  }
+
+    createOrderInFirestore()
+    .then(res => {
+      alert('your order has been created with the ID ' + res.id)
+      cart.forEach(async (item) => {
+        const itemRef = doc(DB, 'item', item.id)
+        await updateDoc(itemRef, {
+          stock: increment(-item.contador)
+        })
+      });
+      clearCart()
+    })
+    .catch(err => console.log(err))
+  }
+
+
   return (
     <div >
       <div >
@@ -78,7 +116,7 @@ export default function Cart() {
             <Button variant="outline-danger" onClick={clearCart}>
               vaciar carrito
             </Button>
-            <Button variant="outline-success">
+            <Button variant="outline-success" onClick={createOrder}>
               FINALIZAR COMPRA
             </Button>
           </div>

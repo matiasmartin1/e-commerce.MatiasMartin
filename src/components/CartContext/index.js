@@ -1,6 +1,4 @@
 import { useState, createContext } from "react";
-import { Button } from 'react-bootstrap'
-
 
 export const CartContext = createContext();
 
@@ -17,7 +15,7 @@ export const CartContextProvider = ({ children }) => {
 
   const addItem = (product) => {
     setCantInCart(cantInCart + product.contador);
-    setTotalPrice(totalPrice + product.precio*product.contador)
+    setTotalPrice(totalPrice + product.price *product.contador)
     if (isInCart(product.id)) {
       const newCart = cart.map((productInCart) => {
         if (productInCart.id === product.id) {
@@ -39,7 +37,7 @@ export const CartContextProvider = ({ children }) => {
     setCart(cart.filter((product) => product.id !== id))
     const itemRemoved = cart.find(product => product.id === id);
     setCantInCart(cantInCart - itemRemoved.contador);
-    setTotalPrice(totalPrice - itemRemoved.contador * itemRemoved.precio);
+    setTotalPrice(totalPrice - itemRemoved.contador * itemRemoved.price);
   }
 
   const clearCart = () => {
