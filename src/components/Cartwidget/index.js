@@ -1,7 +1,8 @@
 import React, {useContext} from "react"
 import {AiOutlineShoppingCart} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { CartContext } from "../CartContext";
+import './index.css'
+import { CartContext } from '../../context/CartContext';
 
 function Cart(){
     const { cantInCart } = useContext(CartContext)
@@ -9,11 +10,11 @@ function Cart(){
  
     return (
         
-        <div className="cartIcon">
+        <div >
             <Link to="/cart">
-            <AiOutlineShoppingCart className='icon__cartIcon'/>
+            <AiOutlineShoppingCart />
             </Link>
-            {cantInCart!==0 ? <input type="text" value={cantInCart} readOnly/> : ""}
+            {cantInCart!==0 ? <input className="inputicon" type="text" value={cantInCart} readOnly/> : ""}
             
         </div>
     )

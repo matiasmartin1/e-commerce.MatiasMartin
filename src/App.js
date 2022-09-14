@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemListConteiner from './components/itemListConteiner';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ItemDetailConteiner from './components/ItemDetailConteiner';
-import { CartContextProvider } from './components/CartContext';
 import Cart from './components/Cart'
+import CartContextProvider from './context/CartContext';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/category/:categoryId' element={<ItemListConteiner />} />
           <Route path='/item/:id' element={<ItemDetailConteiner />} />
           <Route path='/cart' element={<Cart />}></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </CartContextProvider>
     </BrowserRouter>

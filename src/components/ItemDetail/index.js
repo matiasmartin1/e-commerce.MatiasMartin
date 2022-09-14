@@ -3,6 +3,7 @@ import ItemCount from "../ItemCount";
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
+import './index.css'
 
 export default function ItemDetail({ id,
   title,

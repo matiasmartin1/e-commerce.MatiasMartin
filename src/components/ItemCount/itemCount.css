@@ -1,5 +1,6 @@
 .itemCountButtons {
     display: flex;
+    justify-content: center;
 }
 
 .itemCountButtons p {

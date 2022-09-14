@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import './index.css'
 
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { DB } from "../../Firebase/FirebaseConfig";
@@ -15,13 +16,11 @@ export default function ItemListConteiner() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { id } = useParams();
-    const categoryId = !isNaN(id) && +id;
-  
-      useEffect(()=>{
-  
+    const { categoryId } = useParams();
+      
+    
+    useEffect(()=>{
         const coleRef = collection(DB, "item");
-       
         if(categoryId){
           const  colFilterRef = query(coleRef, where('categoria', '==', categoryId))
           getDocs(colFilterRef)
@@ -35,11 +34,11 @@ export default function ItemListConteiner() {
         
       },[categoryId]);
     return (
-        <Container>
-            <Row>
+        <Container >
+            <Row >
             {
                 loading ? <h2>Cargando... </h2> :
-                    <ItemList prod={data}  />
+                    <ItemList className='productos'prod={data}  />
             }
             </Row>
         </Container>

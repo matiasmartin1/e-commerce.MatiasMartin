@@ -1,0 +1,8 @@
+.inputicon {
+    outline: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+}

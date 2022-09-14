@@ -1,5 +1,5 @@
 import {  useContext, useState, useEffect } from "react";
-import { CartContext } from "../CartContext";
+import { CartContext } from '../../context/CartContext';
 import './itemCount.css'
 
 export default function ItemCount({ stock, initial, itemAddToCart, itemData }) {
